@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>電卓アプリ</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .calculator {
+            display: inline-block;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            background-color: #e9e9e9;
+        }
+
+        @font-face {
+            font-family: 'Digital-7';
+            src: url("digitalism.ttf") format('truetype'); 
+        }
+        .panel {
+            font-family: 'Digital-7', Arial, sans-serif;
+            margin: 20px;
+            padding: 10px;
+            font-size: 24px;
+            background-color: #cfffec;
+        }
+        .button-number {
+            font-size: 16px;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #93ff27;
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .button-number:hover {
+            background-color: #00ff1a;
+        }
+        .button-number:active {
+            background-color: #3e8e41;
+        }
+
+        .button {
+            font-size: 16px;
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #FC9DB8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .button:hover {
+            background-color: #ff477b;
+        }
+        .button:active {
+            background-color: #3e8e41;
+        }
+
+        .meaningless-button {
+            font-size: 30px;
+            width: 120px;
+            height: 120px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #FFD700; /* ゴールド */
+            color: white;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+
+        }
+        .meaningless-button:hover {
+            background-color: #FFC700;
+        }
+        .meaningless-button:active {
+            background-color: #FFB700;
+        }
+
+        @keyframes rainbow {
+            0% { background-color: #FFD700; } /* ゴールド */
+            20% { background-color: #FFA500; } /* オレンジ */
+            40% { background-color: #FF0000; } /* レッド */
+            60% { background-color: #800080; } /* パープル */
+            80% { background-color: #0000FF; } /* ブルー */
+            100% { background-color: #00FF00; } /* グリーン */
+        }
+    </style>
+</head>
+<body>
+    <h1>電卓アプリ</h1>
+    <div class="calculator">
+        <input class="panel" type="text" id="display" readonly>
+        <br>
+        <!-- ボタンの配置を修正 -->
+        <button class="button-number" onclick="appendToDisplay('7')">7</button>
+        <button class="button-number" onclick="appendToDisplay('8')">8</button>
+        <button class="button-number" onclick="appendToDisplay('9')">9</button>
+        <button class="button" onclick="appendToDisplay('+')">+</button>
+        <br>
+        <button class="button-number" onclick="appendToDisplay('4')">4</button>
+        <button class="button-number" onclick="appendToDisplay('5')">5</button>
+        <button class="button-number" onclick="appendToDisplay('6')">6</button>
+        <button class="button" onclick="appendToDisplay('-')">-</button>
+        <br>
+        <button class="button-number" onclick="appendToDisplay('1')">1</button>
+        <button class="button-number" onclick="appendToDisplay('2')">2</button>
+        <button class="button-number" onclick="appendToDisplay('3')">3</button>
+        <button class="button" onclick="appendToDisplay('*')">*</button>
+        <br>
+        <button class="button-number" onclick="appendToDisplay('0')">0</button>
+        <button class="button" onclick="clearDisplay()">C</button>
+        <button class="button" onclick="calculate()">=</button>
+        <button class="button" onclick="appendToDisplay('/')">/</button>
+
+        <!-- 無意味なボタン -->
+        <br>
+        <button class="meaningless-button" onclick="meaninglessButton('🎉')"onmouseover="startRainbow()" onmouseout="stopRainbow()">🎉</button>
+    </div>
+
+    <!-- 音声ファイルを読み込み -->
+    <audio id="sound">
+        <source src="button_sound.mp3" type="audio/mpeg">
+        <!-- 音声ファイルがサポートされていない場合の代替テキスト -->
+        Your browser does not support the audio element.
+    </audio>
+
+    <script>
+        function appendToDisplay(value) {
+            const display = document.getElementById('display');
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            const display = document.getElementById('display');
+            display.value = '';
+        }
+
+        function calculate() {
+            const display = document.getElementById('display');
+            try {
+                display.value = eval(display.value);
+            } catch (error) {
+                display.value = 'Error';
+            }
+        }
+
+        // 無意味なボタンのクリックイベント
+        function meaninglessButton(emoji) {
+            // 音を鳴らす
+            const sound = document.getElementById('sound');
+            sound.play();
+        }
+
+        function startRainbow() {
+            const button = document.querySelector('.meaningless-button');
+            button.style.animation = 'rainbow 1s infinite';
+        }
+
+        function stopRainbow() {
+            const button = document.querySelector('.meaningless-button');
+            const computedStyle = window.getComputedStyle(button);
+            button.style.animation = '';
+            button.style.backgroundColor = computedStyle.backgroundColor;
+        }
+    </script>
+</body>
+</html>
