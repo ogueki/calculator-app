@@ -71,7 +71,7 @@
             height: 120px;
             margin: 5px;
             cursor: pointer;
-            background-color: #FFD700; /* ゴールド */
+            background-color: #FFD700; 
             color: white;
             border: none;
             border-radius: 10px;
@@ -86,12 +86,12 @@
         }
 
         @keyframes rainbow {
-            0% { background-color: #FFD700; } /* ゴールド */
-            20% { background-color: #FFA500; } /* オレンジ */
-            40% { background-color: #FF0000; } /* レッド */
-            60% { background-color: #800080; } /* パープル */
-            80% { background-color: #0000FF; } /* ブルー */
-            100% { background-color: #00FF00; } /* グリーン */
+            0% { background-color: #FFD700; } 
+            20% { background-color: #FFA500; }
+            40% { background-color: #FF0000; } 
+            60% { background-color: #800080; }
+            80% { background-color: #0000FF; } 
+            100% { background-color: #00FF00; } 
         }
     </style>
 </head>
@@ -100,7 +100,6 @@
     <div class="calculator">
         <input class="panel" type="text" id="display" readonly>
         <br>
-        <!-- ボタンの配置を修正 -->
         <button class="button-number" onclick="appendToDisplay('7')">7</button>
         <button class="button-number" onclick="appendToDisplay('8')">8</button>
         <button class="button-number" onclick="appendToDisplay('9')">9</button>
@@ -153,6 +152,7 @@
             }
         }
 
+
         // 無意味なボタンのクリックイベント
         function meaninglessButton(emoji) {
             // 音を鳴らす
@@ -160,11 +160,13 @@
             sound.play();
         }
 
+        // ボタンの虹色ルーレットを始める
         function startRainbow() {
             const button = document.querySelector('.meaningless-button');
             button.style.animation = 'rainbow 1s infinite';
         }
 
+        // 虹色ルーレットを止める
         function stopRainbow() {
             const button = document.querySelector('.meaningless-button');
             const computedStyle = window.getComputedStyle(button);
