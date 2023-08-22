@@ -19,7 +19,7 @@ function calculate() {
 
 
 // 無意味なボタンのクリックイベント
-function meaninglessButton(emoji) {
+function meaninglessButton() {
     // 音を鳴らす
     const sound = document.getElementById('sound');
     sound.play();
